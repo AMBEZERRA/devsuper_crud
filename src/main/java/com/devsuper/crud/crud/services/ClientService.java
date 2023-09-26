@@ -3,6 +3,8 @@ package com.devsuper.crud.crud.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.devsuper.crud.crud.dto.ClientDTO;
@@ -15,6 +17,7 @@ public class ClientService {
 	@Autowired
 	private ClientRepository repository;	
 	
+	
 	public ClientDTO findById(Long id) {
 		Optional<Client> result = repository.findById(id);
 		Client client = result.get();
@@ -22,5 +25,9 @@ public class ClientService {
 		return dto;
 	}
 	
+	public Page<ClientDTO>  findAll(Pageable pageable ) {
+		Page<Client> result = repository.findAll(pageable);
+		return result.map(x -> new ClientDTO(x));
+	}
 	
 }
