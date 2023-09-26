@@ -1,2 +1,10 @@
-INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Maria Brown', 'maria@gmail.com', '988888888', '123456', '2001-07-25');
-INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Alex Green', 'alex@gmail.com', '977777777', '123456', '1987-12-13');
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Maria Brown', '123654899', 1800.00, '1985-07-23', 2);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Maria Bonita', '458975685', 2500.00, '2001-07-25', 3);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Maria Mendonça', '589658785', 3800.00, '1989-06-22', 1);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Marcia Cavalcante', '136589745', 4500.00, '1998-09-14', 4);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Bruno Mesquita', '256897458', 5600.00, '2001-07-25', 2);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Dinora Loiola', '125487965', 2445.00, '2001-03-24', 2);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Amentista Amaro', '365985478', 3180.00, '2000-08-04', 3);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Gilbertran Golçalves', '159753658', 4580.00, '1983-12-11', 1);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Amélia Araujo Fragata', '159753658', 4580.00, '1997-10-18', 1);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Carlos Alberto Parreira', '159753658', 4580.00, '1995-09-18', 1);
