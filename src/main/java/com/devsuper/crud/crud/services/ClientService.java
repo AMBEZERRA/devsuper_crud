@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import com.devsuper.crud.crud.dto.ClientDTO;
 import com.devsuper.crud.crud.entities.Client;
 import com.devsuper.crud.crud.repositories.ClientRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -38,6 +40,19 @@ public class ClientService {
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new ClientDTO(entity);
+	}
+	
+	@Transactional
+	public ClientDTO update(Long id, ClientDTO dto) {
+		try {
+			Client entity = repository.getReferenceById(id);
+			copyDtoToEntity(dto, entity);
+			return new ClientDTO(entity);
+					
+		}
+		catch(EntityNotFoundException e) {
+			throw new ResourceAccessException("ID não encontrado");
+		}
 	}
 	
 	//Metodo auxiliar

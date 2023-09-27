@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devsuper.crud.crud.dto.ClientDTO;
 import com.devsuper.crud.crud.services.ClientService;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 
@@ -61,4 +63,10 @@ public class ClientController {
 		return ResponseEntity.created(uri).body(dto);
 	}
 	
+	@Transactional
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<ClientDTO> update(@PathVariable Long id, @Valid @RequestBody ClientDTO dto){
+		dto = service.update(id, dto);
+		return ResponseEntity.ok(dto);
+	}
 }
