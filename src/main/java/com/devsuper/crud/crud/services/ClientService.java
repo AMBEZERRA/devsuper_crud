@@ -3,6 +3,7 @@ package com.devsuper.crud.crud.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import org.springframework.web.client.ResourceAccessException;
 import com.devsuper.crud.crud.dto.ClientDTO;
 import com.devsuper.crud.crud.entities.Client;
 import com.devsuper.crud.crud.repositories.ClientRepository;
+import com.devsuper.crud.crud.services.exceptions.DataBaseException;
+import com.devsuper.crud.crud.services.exceptions.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -55,6 +58,19 @@ public class ClientService {
 		}
 	}
 	
+	@Transactional // padrão pra o tipo de erro esperado
+	public void delete(Long id) {
+		if(!repository.existsById(id)) {
+			throw new ResourceNotFoundException("Elemento não encontrado");
+		}
+		try {
+		repository.deleteById(id);
+	} catch (DataIntegrityViolationException e){
+		throw new DataBaseException("Falha de integridade referencial");
+	}
+		
+}
+	
 	//Metodo auxiliar
 	 private void copyDtoToEntity(ClientDTO dto, Client entity) {
 		entity.setName(dto.getName());
@@ -64,7 +80,5 @@ public class ClientService {
 		entity.setChildren(dto.getChildren());
 
 	}
-	
-	 
 	
 }
